@@ -16,13 +16,12 @@ Built a responsive calculator using React and Materialize
 <li>Better responsivenss on mobile devices in "landscape"</li>
 <li>Allow user to customze calculator's buttons and font</li>
 <li>Allow user to switch between solving with order of operations and immediate logic</li>
-
+<li>Fix minor bugs</li>
 
 
 <br />
 <br />
-Link: 
-
+Link: https://my-calcu-la-tor.herokuapp.com/
 
 
 
