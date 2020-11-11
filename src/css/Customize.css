@@ -1,0 +1,75 @@
+#custom {
+    margin-top: 25%;
+  }
+#color-button {
+    margin-left: 20px;
+}
+input {
+  margin-top: 20px;
+}
+button {
+  white-space: nowrap;
+}
+div.col.s6 {
+  padding: 0px;
+  text-align: center;
+}
+@media only screen and (max-width: 600px) {
+  #color-button {
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+  input {
+    margin-right: 70px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  div.col.s6 {
+    padding: 0;
+  }
+  button#color-button {
+    padding: 0px;
+  }
+  input {
+    margin-right: 50px;
+  }
+}
+@media only screen and (max-height: 649px) {
+  button#color-button {
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+  input {
+    margin-right: 50px;
+  }
+  .col.s6 {
+    padding: 0px;
+  }
+} 
+@media only screen and (max-height: 500px) {
+  button#color-button {
+    margin-top: 20px;
+    padding: 0px;
+    margin-left: 0px;
+  }
+
+}
+@media only screen and (max-height: 400px) {
+  div.col.s6 {
+    margin-left: 20px;
+    padding: 0px;
+  }
+  #custom {
+    margin-top: 30%;
+    width: 120%;
+  }
+  input {
+    margin-right: 20px;
+  }
+}
+@media only screen and (max-height: 300px) {
+  #custom {
+    margin-top: 15%;
+    width: 132%;
+  }
+}
