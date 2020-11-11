@@ -2,7 +2,7 @@
 
 # Description
 
-Built a responsive calculator using React and Materialize 
+Built a responsive calculator using React for the front-end, Materialize framework to handle the css, along wth css grid, and finally the Math.js javascript library to handle calculations.
 
 
 <h4>Features</h4>
