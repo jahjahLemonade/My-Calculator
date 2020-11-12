@@ -8,7 +8,6 @@ const App = () => {
   return (
     <Router>
     <Navbar />
-      <div className="App">
         <Route
           exact
           path="/"
@@ -23,7 +22,6 @@ const App = () => {
               <Customize />
           )}
         />
-      </div>
     </Router>
   );
 };

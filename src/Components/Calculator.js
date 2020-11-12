@@ -77,7 +77,7 @@ const Calculator = () => {
   };
   return (
     <div className="calculator">
-      <div id="display" style={{ fontSize: "16px" }}>
+      <div id="display" style={{ fontSize: "16px", height: "2vh" }}>
         {calculation}
       </div>
       <div id="display">{state}</div>
