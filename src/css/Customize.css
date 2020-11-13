@@ -1,32 +1,29 @@
-#custom {
-    margin-top: 25%;
-  }
+
+.flexbox {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
+  flex-wrap: wrap;
+}
+div.customize {
+  margin: 0px auto;
+}
 #color-button {
     margin-left: 20px;
 }
 input {
   margin-top: 20px;
 }
-button {
+button#color-button {
   white-space: nowrap;
 }
-div.col.s6 {
-  padding: 0px;
-  text-align: center;
-}
-@media only screen and (max-width: 600px) {
-  #color-button {
-    margin-left: 0px;
-    margin-top: 20px;
-  }
-  input {
-    margin-right: 70px;
-  }
-}
+
+/* @media only screen and (max-width: 425px) {
+  flex-direction: ;
+} */
+/*
 @media only screen and (max-width: 400px) {
-  div.col.s6 {
-    padding: 0;
-  }
   button#color-button {
     padding: 0px;
   }
@@ -42,9 +39,6 @@ div.col.s6 {
   input {
     margin-right: 50px;
   }
-  .col.s6 {
-    padding: 0px;
-  }
 } 
 @media only screen and (max-height: 500px) {
   button#color-button {
@@ -55,21 +49,13 @@ div.col.s6 {
 
 }
 @media only screen and (max-height: 400px) {
-  div.col.s6 {
-    margin-left: 20px;
-    padding: 0px;
-  }
-  #custom {
-    margin-top: 30%;
-    width: 120%;
-  }
   input {
     margin-right: 20px;
   }
 }
 @media only screen and (max-height: 300px) {
-  #custom {
+  .customize {
     margin-top: 15%;
     width: 132%;
   }
-}
+} */

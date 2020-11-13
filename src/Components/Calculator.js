@@ -80,7 +80,7 @@ const Calculator = () => {
       <div id="display" style={{ fontSize: "16px", height: "2vh" }}>
         {calculation}
       </div>
-      <div id="display">{state}</div>
+      <div id="display">{state}</div>  
       <div className="divider"></div>
       <div className="calculator-buttons">
         <button className="btn" id="clear" onClick={(e) => handleClick(e)}>
