@@ -15,7 +15,6 @@ Built a responsive calculator using React for the front-end, Materialize framewo
 <h4>Things I will be adding soon</h4>
 <li>Better responsivenss on mobile devices in "landscape"</li>
 <li>Allow user to customze calculator's buttons and font</li>
-<li>Allow user to switch between solving with order of operations and immediate logic</li>
 <li>Fix minor bugs</li>
 
 
