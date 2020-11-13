@@ -14,12 +14,13 @@ div.calculator {
   margin: 0 auto;
   border: 2px solid white;
   border-radius: 5px;
-  /* position: relative; */
 }
 div#display {
   color: #fffffe;
   text-align: right;
   font-size: 4em;
+  overflow-x: scroll;
+  margin: 5px;
 }
 div.divider {
     background-color: rgba(187, 176, 212, 0.5);

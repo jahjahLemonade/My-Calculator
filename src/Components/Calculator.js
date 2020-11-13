@@ -12,9 +12,11 @@ const Calculator = () => {
   const handleClick = (e) => {
     const value = e.target.textContent;
     if (value === "=") {
-      if (state !== "+" || state !== "-" || state !== "*" || state !== "/") {
+      if (state !== "+" || state !== "-" || state !== "*" || state !== "/" || state !== "=") {
+        const decimalIdx = calculation.indexOf(".") 
+        const distanceFromLastNum = calculation.length-1 - decimalIdx
         setState("0")
-        setCalculation(prev => math.evaluate(prev + state) < -4294967295 || math.evaluate(prev + state) > 4294967295 ? "Exceeded Digit Limit" : math.evaluate(prev + state) )
+        setCalculation(prev => distanceFromLastNum <= 4 ? `${prev}${state}=${math.round(math.evaluate(prev + state) * 10000) / 10000 }` : math.evaluate(prev + state))
       }
     } 
     if (
@@ -40,7 +42,8 @@ const Calculator = () => {
         lastChar === "+" ||
         lastChar === "-" ||
         lastChar === "/" ||
-        lastChar === "*"
+        lastChar === "*" ||
+        lastChar === undefined 
       ) {
         if (state === "+" || state === "-" || state === "*" || state === "/") {
           setState(value);
@@ -49,7 +52,7 @@ const Calculator = () => {
           setState(value);
         }
       } else {
-          setCalculation((prev) => prev + state + value);
+          setCalculation((prev) => prev + state);
           setState(value);
         }
     } else {
@@ -77,7 +80,7 @@ const Calculator = () => {
   };
   return (
     <div className="calculator">
-      <div id="display" style={{ fontSize: "16px", height: "2vh" }}>
+      <div id="display" style={{ fontSize: "16px", height: "3.5vh" }}>
         {calculation}
       </div>
       <div id="display">{state}</div>  
