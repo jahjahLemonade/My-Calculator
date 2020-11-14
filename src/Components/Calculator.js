@@ -15,33 +15,41 @@ const Calculator = () => {
     if (value === "=" && (state !== "+" || state !== "-" || state !== "*" || state !== "/" || state !== "=")) {
         const decimalIdx = calculation.indexOf(".") 
         const distanceFromLastNum = calculation.length-1 - decimalIdx
-        setState("0")
-        setCalculation(prev => distanceFromLastNum <= 4 ? `${prev}${state}=${math.round(math.evaluate(prev + state) * 10000) / 10000 }` : math.evaluate(prev + state))
+        const total = calculation + state
+        setCalculation(prev => distanceFromLastNum <= 4 ? `${prev}${state}=${math.round(math.evaluate(prev + state) * 10000) / 10000 }` : `${prev}${state}=${math.evaluate(prev + state)}`)
+        setState((math.round(math.evaluate(total) * 10000) / 10000).toString())
     } 
-    if(value === "±" && (state !== "+" || state !== "-" || state !== "*" || state !== "/")) { 
+    if(calculation.includes("=") === true && (value === "+" || value === "-" || value === "*" || value === "/")) {
+      setCalculation(state + value)
+      setState(value)
+    } else if(calculation.includes("=") === true) {
+      setCalculation("")
+      setState(value === "±" ? "0" : "")
+    }
+    if(value === "±" && (state !== "+" && state !== "-" && state !== "*" && state !== "/")) { 
       setState(prev => prev[0] !== "-" ? `-${prev}` : prev.slice(1))
     }
-    if(state.includes(".") === false) {
+    if(state.includes(".") === false && value !== "±" && value !== "=" ) {
       setState(prev => prev + value)
-    } else if(value !== ".") {
+    } else if(value !== "." && value !== "±" && value !== "=") {
       setState(prev => prev + value)
     }
 
     if (
-      (state === "0" && calculation === "") &&
-      (value !== "+" ||
-        value !== "-" ||
-        value !== "*" ||
-        value !== "/" ||
+      (state === "0") &&
+      (value !== "+" &&
+        value !== "-" &&
+        value !== "*" &&
+        value !== "/" &&
         value !== "=")
     ) {
-      setState(value);
+      setState(prev => (value === "±" && prev === "0") ? `-${prev}` : (value === "±" && prev === "-0")  ? prev : value);
       setCalculation("")
     } else if (
       value === "+" ||
       value === "-" ||
       value === "/" ||
-      value === "*"
+      value === "*" 
     ) {
       
       const lastChar = calculation[calculation.length - 1];
@@ -59,7 +67,7 @@ const Calculator = () => {
           setState(value);
         }
       } else {
-          setCalculation((prev) => prev + state);
+          // setCalculation((prev) => prev );
           setState(value);
         }
     } else {
