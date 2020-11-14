@@ -64,11 +64,6 @@ div.divider {
   color: var(--secondary);
 }
 
-#blank-space {
-  opacity: 0;
-  margin-left: 0px;
-  margin-right: 0px;
-}
 .sidenav-overlay {
   height: 0px;
   width: 0px;

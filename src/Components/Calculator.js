@@ -11,21 +11,28 @@ const Calculator = () => {
 
   const handleClick = (e) => {
     const value = e.target.textContent;
-    if (value === "=") {
-      if (state !== "+" || state !== "-" || state !== "*" || state !== "/" || state !== "=") {
+    
+    if (value === "=" && (state !== "+" || state !== "-" || state !== "*" || state !== "/" || state !== "=")) {
         const decimalIdx = calculation.indexOf(".") 
         const distanceFromLastNum = calculation.length-1 - decimalIdx
         setState("0")
         setCalculation(prev => distanceFromLastNum <= 4 ? `${prev}${state}=${math.round(math.evaluate(prev + state) * 10000) / 10000 }` : math.evaluate(prev + state))
-      }
     } 
+    if(value === "±" && (state !== "+" || state !== "-" || state !== "*" || state !== "/")) { 
+      setState(prev => prev[0] !== "-" ? `-${prev}` : prev.slice(1))
+    }
+    if(state.includes(".") === false) {
+      setState(prev => prev + value)
+    } else if(value !== ".") {
+      setState(prev => prev + value)
+    }
+
     if (
-      state === "0" &&
+      (state === "0" && calculation === "") &&
       (value !== "+" ||
         value !== "-" ||
         value !== "*" ||
         value !== "/" ||
-        value !== "0" ||
         value !== "=")
     ) {
       setState(value);
@@ -45,7 +52,7 @@ const Calculator = () => {
         lastChar === "*" ||
         lastChar === undefined 
       ) {
-        if (state === "+" || state === "-" || state === "*" || state === "/") {
+        if (state === "+" || state === "-" || state === "*" || state === "/" || state === "." || state === "-." || state === "±" || state === "=") {
           setState(value);
         } else {
           setCalculation((prev) => prev + state + value);
@@ -56,7 +63,7 @@ const Calculator = () => {
           setState(value);
         }
     } else {
-      if (state === "+" || state === "-" || state === "*" || state === "/") {
+      if (state === "+" || state === "-" || state === "*" || state === "/" || state === "±") {
         setState(value);
       } else {
         if (
@@ -65,14 +72,15 @@ const Calculator = () => {
           value !== "-" ||
           value !== "*" ||
           value !== "/" ||
-          value !== "="
+          value !== "=" 
+
         ) {
-          if(value !== "=") 
-            setState(prev => prev + value);
+          if(value !== "=" && value !== "±" && value === ".") {
+            setState(prev => value === "." ? prev : prev + value);
           }
+        }
       }
     }
-
     if (value === "C") {
       setState("0");
       setCalculation("");
@@ -89,8 +97,8 @@ const Calculator = () => {
         <button className="btn" id="clear" onClick={(e) => handleClick(e)}>
           C
         </button>
-        <button disabled className="btn" id="blank-space">
-          n/a
+        <button className="btn" id="conversion" onClick={(e) => handleClick(e)}>
+        ±
         </button>
         <button className="btn" id="divide" onClick={(e) => handleClick(e)}>
           /
