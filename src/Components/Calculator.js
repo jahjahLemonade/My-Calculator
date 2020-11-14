@@ -8,70 +8,110 @@ const Calculator = () => {
   const config = {};
   const math = create(all, config);
 
-
   const handleClick = (e) => {
     const value = e.target.textContent;
-    
-    if (value === "=" && (state !== "+" || state !== "-" || state !== "*" || state !== "/" || state !== "=")) {
-        const decimalIdx = calculation.indexOf(".") 
-        const distanceFromLastNum = calculation.length-1 - decimalIdx
-        const total = calculation + state
-        setCalculation(prev => distanceFromLastNum <= 4 ? `${prev}${state}=${math.round(math.evaluate(prev + state) * 10000) / 10000 }` : `${prev}${state}=${math.evaluate(prev + state)}`)
-        setState((math.round(math.evaluate(total) * 10000) / 10000).toString())
-    } 
-    if(calculation.includes("=") === true && (value === "+" || value === "-" || value === "*" || value === "/")) {
-      setCalculation(state + value)
-      setState(value)
-    } else if(calculation.includes("=") === true) {
-      setCalculation("")
-      setState(value === "±" ? "0" : "")
+
+    if (
+      value === "=" &&
+      (state !== "+" ||
+        state !== "-" ||
+        state !== "*" ||
+        state !== "/" ||
+        state !== "=")
+    ) {
+      const decimalIdx = calculation.indexOf(".");
+      const distanceFromLastNum = calculation.length - 1 - decimalIdx;
+      const total = calculation + state;
+      setCalculation((prev) =>
+        distanceFromLastNum <= 4
+          ? `${prev}${state}=${
+              math.round(math.evaluate(prev + state) * 10000) / 10000
+            }`
+          : `${prev}${state}=${math.evaluate(prev + state)}`
+      );
+      setState((math.round(math.evaluate(total) * 10000) / 10000).toString());
     }
-    if(value === "±" && (state !== "+" && state !== "-" && state !== "*" && state !== "/")) { 
-      setState(prev => prev[0] !== "-" ? `-${prev}` : prev.slice(1))
+    if (
+      calculation.includes("=") === true &&
+      (value === "+" || value === "-" || value === "*" || value === "/")
+    ) {
+      setCalculation(state + value);
+      setState(value);
+    } else if (calculation.includes("=") === true) {
+      setCalculation("");
+      setState(value === "±" ? "0" : "");
     }
-    if(state.includes(".") === false && value !== "±" && value !== "=" ) {
-      setState(prev => prev + value)
-    } else if(value !== "." && value !== "±" && value !== "=") {
-      setState(prev => prev + value)
+    if (
+      value === "±" &&
+      state !== "+" &&
+      state !== "-" &&
+      state !== "*" &&
+      state !== "/"
+    ) {
+      setState((prev) => (prev[0] !== "-" ? `-${prev}` : prev.slice(1)));
+    }
+    if (state.includes(".") === false && value !== "±" && value !== "=") {
+      setState((prev) => prev + value);
+    } else if (value !== "." && value !== "±" && value !== "=") {
+      setState((prev) => prev + value);
     }
 
     if (
-      (state === "0") &&
-      (value !== "+" &&
-        value !== "-" &&
-        value !== "*" &&
-        value !== "/" &&
-        value !== "=")
+      state === "0" &&
+      value !== "+" &&
+      value !== "-" &&
+      value !== "*" &&
+      value !== "/" &&
+      value !== "="
     ) {
-      setState(prev => (value === "±" && prev === "0") ? `-${prev}` : (value === "±" && prev === "-0")  ? prev : value);
-      setCalculation("")
+      setState((prev) =>
+        value === "±" && prev === "0"
+          ? `-${prev}`
+          : value === "±" && prev === "-0"
+          ? prev
+          : value
+      );
+      setCalculation("");
     } else if (
       value === "+" ||
       value === "-" ||
       value === "/" ||
-      value === "*" 
+      value === "*"
     ) {
-      
       const lastChar = calculation[calculation.length - 1];
       if (
         lastChar === "+" ||
         lastChar === "-" ||
         lastChar === "/" ||
         lastChar === "*" ||
-        lastChar === undefined 
+        lastChar === undefined
       ) {
-        if (state === "+" || state === "-" || state === "*" || state === "/" || state === "." || state === "-." || state === "±" || state === "=") {
+        if (
+          state === "+" ||
+          state === "-" ||
+          state === "*" ||
+          state === "/" ||
+          state === "." ||
+          state === "-." ||
+          state === "±" ||
+          state === "="
+        ) {
           setState(value);
         } else {
           setCalculation((prev) => prev + state + value);
           setState(value);
         }
       } else {
-          // setCalculation((prev) => prev );
-          setState(value);
-        }
+        setState(value);
+      }
     } else {
-      if (state === "+" || state === "-" || state === "*" || state === "/" || state === "±") {
+      if (
+        state === "+" ||
+        state === "-" ||
+        state === "*" ||
+        state === "/" ||
+        state === "±"
+      ) {
         setState(value);
       } else {
         if (
@@ -80,11 +120,10 @@ const Calculator = () => {
           value !== "-" ||
           value !== "*" ||
           value !== "/" ||
-          value !== "=" 
-
+          value !== "="
         ) {
-          if(value !== "=" && value !== "±" && value === ".") {
-            setState(prev => value === "." ? prev : prev + value);
+          if (value !== "=" && value !== "±" && value === ".") {
+            setState((prev) => (value === "." ? prev : prev + value));
           }
         }
       }
@@ -99,14 +138,14 @@ const Calculator = () => {
       <div id="display" style={{ fontSize: "16px", height: "3.5vh" }}>
         {calculation}
       </div>
-      <div id="display">{state}</div>  
+      <div id="display">{state}</div>
       <div className="divider"></div>
       <div className="calculator-buttons">
         <button className="btn" id="clear" onClick={(e) => handleClick(e)}>
           C
         </button>
         <button className="btn" id="conversion" onClick={(e) => handleClick(e)}>
-        ±
+          ±
         </button>
         <button className="btn" id="divide" onClick={(e) => handleClick(e)}>
           /
