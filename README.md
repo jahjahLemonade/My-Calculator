@@ -6,7 +6,7 @@ Built a responsive calculator using React for the front-end, Materialize framewo
 
 
 <h4>Features</h4>
-<li>User can calculate equations using Immediate Execution Logic</li>
+<li>User can calculate equations using Order of Operations</li>
 <li>User can customize the color of the webpage's background and nav-bar</li>
 <li>Nav-bar switch to "hamburger" menu for smaller screens</li>
 <li>Check for answers that are too large</li>
