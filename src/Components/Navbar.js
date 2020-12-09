@@ -1,12 +1,12 @@
 import {useEffect}from "react"
 import { Link } from "react-router-dom";
-import M from "materialize-css";
 import "../css/Navbar.css";
+import M from "materialize-css";
 
 const Navbar = () => {
   useEffect(() => {
     M.AutoInit()
-  })
+  }, [])
   return (
     <div>
       <ul className="sidenav" id="mobile-demo">

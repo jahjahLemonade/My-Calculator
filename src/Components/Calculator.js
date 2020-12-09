@@ -16,49 +16,53 @@ const Calculator = ({
   const [calculation, setCalculation] = useState("");
   const config = {};
   const math = create(all, config);
-
   const handleClick = (e) => {
     const value = e.target.textContent;
+    //when decimal val is entered, add it to zero
+      if (
+        value === "=" &&
+        (state !== "+" ||
+          state !== "-" ||
+          state !== "*" ||
+          state !== "/" ||
+          state !== "=")
+      ) {
+        //Calc history
 
-    if (
-      value === "=" &&
-      (state !== "+" ||
-        state !== "-" ||
-        state !== "*" ||
-        state !== "/" ||
-        state !== "=")
-    ) {
-      const decimalIdx = calculation.indexOf(".");
-      const distanceFromLastNum = calculation.length - 1 - decimalIdx;
-      const total = calculation + state;
-      const lastIdx = total.length - 1;
-      setCalculation((prev) =>
-        prev.includes("=") ||
-        prev[prev.length - 1] === "+" ||
-        prev[prev.length - 1] === "-" ||
-        prev[prev.length - 1] === "*" ||
-        prev[prev.length - 1] === "/" ||
-        state === "." ||
-        state === "-."
-          ? ""
-          : distanceFromLastNum <= 4
-          ? `${prev}${state}=${
+        const total = calculation + state;
+        const lastIdx = total.length - 1;
+        try {
+        //Calculation checker
+        math.round(math.evaluate(total))
+        setCalculation((prev) =>
+          prev.includes("=") ||
+          prev[prev.length - 1] === "+" ||
+          prev[prev.length - 1] === "-" ||
+          prev[prev.length - 1] === "*" ||
+          prev[prev.length - 1] === "/" 
+            ? //Error source, need some kind of error handling
+            `${prev}${state}=${
               math.round(math.evaluate(prev + state) * 10000) / 10000
             }`
-          : `${prev}${state}=${math.evaluate(prev + state)}`
-      );
-      setState(() =>
-        total.includes("=") ||
-        total[lastIdx] === "+" ||
-        total[lastIdx] === "-" ||
-        total[lastIdx] === "*" ||
-        total[lastIdx] === "/" ||
-        total[lastIdx] === "±" ||
-        total[lastIdx] === "."
-          ? "0"
-          : (math.round(math.evaluate(total) * 10000) / 10000).toString()
-      );
-    }
+            : ""
+        );
+          } catch {
+            setCalculation("")
+          }
+        setState(() =>
+          total.includes("=") ||
+          total[lastIdx] === "+" ||
+          total[lastIdx] === "-" ||
+          total[lastIdx] === "*" ||
+          total[lastIdx] === "/" ||
+          total[lastIdx] === "±" ||
+          total[lastIdx] === "."
+            ? "0"
+            : (math.round(math.evaluate(total) * 10000) / 10000).toString()
+        );
+      }
+       
+
     if (
       calculation.includes("=") === true &&
       (value === "+" || value === "-" || value === "*" || value === "/")
@@ -78,12 +82,22 @@ const Calculator = ({
     ) {
       setState((prev) => (prev[0] !== "-" ? `-${prev}` : prev.slice(1)));
     }
-    if (state.includes(".") === false && value !== "±" && value !== "=") {
+
+    //Num builder
+    if (
+      calculation.includes("=") &&
+      (value !== "+" || value !== "*" || value !== "/" || value !== "-")
+    ) {
+      setState(value);
+    } else if (
+      state.includes(".") === false &&
+      value !== "±" &&
+      value !== "="
+    ) {
       setState((prev) => prev + value);
     } else if (value !== "." && value !== "±" && value !== "=") {
       setState((prev) => prev + value);
     }
-
     if (
       state === "0" &&
       value !== "+" &&
