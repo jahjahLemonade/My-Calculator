@@ -12,7 +12,6 @@ Built a responsive calculator using React for the front-end, Materialize framewo
 <li>Add scroll for answers and calculations that are too large</li>
 <li>User is able to see calculation history while pressing calculator</li>
 <br />
-<br />
 Link: https://my-calcu-la-tor.herokuapp.com/
 
 
